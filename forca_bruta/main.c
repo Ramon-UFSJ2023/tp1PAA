@@ -24,7 +24,7 @@ int main(){
         int **matriz;
         constMatriz(&matriz, NM); // função que aloca a matriz multiplicando N*M
 
-        while((charOfSecondLine = fgetc(arq)) != '\n'){ // leio proxima linha da entrada, problema aq não entra
+        while((charOfSecondLine = fgetc(arq)) != '\n'){ // leio proxima linha da entrada, problema aq, não entra no while
             printf("Teste\n");
             if(contColun > NM[1]-1){
                 contLine++;
