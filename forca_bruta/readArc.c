@@ -19,37 +19,31 @@ int verifyNumPecas(int *player1, int *player2, int *tamanho, char C){
     return 1;
 }
 
-void liberarMatriz(int **matriz, int *vector){
-    for (int i = 0; i < vector[0]; i++) // Liberando a Matriz
-        free(matriz[i]);
-    free(matriz);
-}
-
 void verifyDia(int **matriz, int* vector, int *contPecas){
     int i = vector[0];
     int j = vector[1];
     int aux1, aux2, aux3, aux4;
 
     if(matriz[i++][j++] == 2 && matriz[i+2][j+2] == 0){ // diagonal superior a direita
-        *contPecas++;
+        (*contPecas)++;
         int aux1=*contPecas;
         verifyDia(matriz, vector, aux1);
     }
 
     if(matriz[i--][j--] == 2 && matriz[i-2][j-2] == 0){ // diagonal inferior a esquerda
-        *contPecas++;
+        (*contPecas)++;
         int aux2=*contPecas;
         verifyDia(matriz, vector, aux2);
     }
 
     if(matriz[i++][j--] == 2 && matriz[i+2][j-2] == 0){ // diagonal superior a esquerda
-        *contPecas++;
+        (*contPecas)++;
         int aux3=*contPecas;
         verifyDia(matriz, vector, aux3);
     }
 
     if(matriz[i--][j++] == 2 && matriz[i-2][j+2] == 0){ // diagonl inferior a direita
-        *contPecas++;
+        (*contPecas)++;
         int aux4=*contPecas;
         verifyDia(matriz, vector, aux4);
     }

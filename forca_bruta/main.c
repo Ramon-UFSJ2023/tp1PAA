@@ -44,7 +44,7 @@ int main(){
                 printf("%d ", matriz[i][j]);
                 if(matriz[i][j] == 1){ // percorre a matriz até achar uma das minhas peças
                     int vec[2] = {i,j};
-                    verifyDia(&matriz, vec, &MaxPecas); // modifico diretamente o valor de MaxPecas(Numero de peças comidas)
+                    verifyDia(matriz, vec, &MaxPecas); // modifico diretamente o valor de MaxPecas(Numero de peças comidas)
                     if(MaxPecas > aux) aux = MaxPecas; //verifico qual peça minha consegue comer mais peças inimifas e coloco em aux
                 }
             }
