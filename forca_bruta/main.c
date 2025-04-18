@@ -17,43 +17,47 @@ int main(){
 
     while(1){
         fscanf(arq, "%d %d", &NM[0], &NM[1]); // Leio o tamanho de linha e colunas do txt
-        //fgetc(arq); // captura o \r que so tem no win
+        fgetc(arq); // captura o \r que so tem no win
         fgetc(arq); // captura o \n
         int contPlayer1 = contPlayer2 = contLine = contColun = contEnter= 0;
         if(verify(NM) == 0) break; // função que verifica as condições
         int **matriz;
         constMatriz(&matriz, NM); // função que aloca a matriz multiplicando N*M
 
-        while((charOfSecondLine == fgetc(arq)) != '\r'){
-            //printf("Ola\n");
+        while((charOfSecondLine == fgetc(arq)) != '\n'){
+            printf("%d \n", charOfSecondLine);
             if(contColun > NM[1]-1){
                 contLine++;
                 if(contLine % 2 == 0){
                     contColun = 0;
-                }else{contColun = 1;} // garanto que as peças serão posicionadas em diagonal nas linhas
+                }else{
+                    contColun = 1;
+                } // garanto que as peças serão posicionadas corretamente
             }
-            if(contLine> NM[0]) break;
+            if(contLine> NM[0]-1) break;
             contEnter++; // numero total da entrada de descrições
             if(verifyNumPecas(&contPlayer1, &contPlayer2, NM, charOfSecondLine) == 0) exit(1);
-            matriz[contLine][contColun]= charOfSecondLine -'0'; // necessario para conversão do caractere para Inteiro
+            matriz[contLine][contColun]= charOfSecondLine; // necessario para conversão do caractere para Inteiro
             contColun+= 2;
         }
-        printf("Ola\n");
-        
         if(contEnter != (NM[0]*NM[1]/2)+1){ // problema aq
             liberarMatriz(matriz, NM);
             break;
         }
+
         for(int i=0; i< NM[0];i++){
-            for (int j=0; j< NM[1];j++){ 
-                if(matriz[i][j] == 1){ // percorre a matriz até achar uma das minhas peças
+            for (int j=0; j< NM[1];j++){
+                printf("%d ", matriz[i][j]);
+                /*if(matriz[i][j] == 1){ // percorre a matriz até achar uma das minhas peças
+                    printf("Ola\n");
                     int vec[2] = {i,j};
                     verifyDia(&matriz, vec, &MaxPecas); // modifico diretamente o valor de MaxPecas(Numero de peças comidas)
                     if(MaxPecas > aux) aux = MaxPecas; //verifico qual peça minha consegue comer mais peças inimifas e coloco em aux
-                }
-
+                }*/
             }
+            printf("\n");
         }
+
         
         liberarMatriz(matriz, NM);
         printf("%d \n", MaxPecas);
