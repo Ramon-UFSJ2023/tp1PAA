@@ -17,18 +17,15 @@ int main(){
 
     while(1){
         fscanf(arq, "%d %d", &NM[0], &NM[1]); // Leio o tamanho de linha e colunas do txt
-        fgetc(arq); 
-
-        printf("%d %d\n", NM[0], NM[1]);
+        fgetc(arq);
+        fgetc(arq);
         if(verify(NM) == 0) break; // função que verifica as condições
         int **matriz;
         constMatriz(&matriz, NM); // função que aloca a matriz multiplicando N*M
 
         while((charOfSecondLine = fgetc(arq)) != '\n'){ // leio proxima linha da entrada, problema aq, não entra no while
-            printf("Teste\n");
             if(contColun > NM[1]-1){
                 contLine++;
-                printf("Teste\n");
                 if(contLine % 2 == 0){
                     contColun = 0;
                 }else{contColun = 1;} // garanto que as peças serão posicionadas em diagonal nas linhas
