@@ -25,10 +25,10 @@ int verifyNumPecas(int *player1, int *player2, int *tamanho, char C){
     return 1;
 }
 
-void liberarMatriz(int ***matriz, int *vector){
+void liberarMatriz(int **matriz, int *vector){
     for (int i = 0; i < vector[0]; i++) // Liberando a Matriz
-        free(*matriz[i]);
-    free(*matriz);
+        free(matriz[i]);
+    free(matriz);
 }
 
 void verifyDia(int ***matriz, int* vector, int *contPecas){
