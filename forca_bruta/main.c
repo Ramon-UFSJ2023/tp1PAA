@@ -5,7 +5,7 @@
 
 int main(){
     int NM[2], contPlayer1=0, contPlayer2=0, contLine=0, contColun=0, contEnter=0, aux=0, MaxPecas=0;
-    
+    char charOfSecondLine;
     FILE *arq = fopen("ent.txt", "r");
 
     if(arq == NULL){
@@ -22,8 +22,8 @@ int main(){
         if(verify(NM) == 0) break; // função que verifica as condições
         int **matriz;
         constMatriz(&matriz, NM); // função que aloca a matriz multiplicando N*M
-        char charOfSecondLine;
         while((charOfSecondLine = fgetc(arq)) != '\n' && charOfSecondLine != EOF){
+            printf("%c", charOfSecondLine);
             if(contColun > NM[1]-1){
                 contLine++;
                 if(contLine % 2 == 0){
@@ -35,7 +35,7 @@ int main(){
             if(contLine> NM[0]-1) break;
             contEnter++; // numero total da entrada de descrições
             if(verifyNumPecas(&contPlayer1, &contPlayer2, NM, charOfSecondLine) == 0) exit(1);
-
+            
             matriz[contLine][contColun] = charOfSecondLine- '0' ; // necessario para conversão do caractere para Inteiro
             contColun+= 2;
         }
@@ -46,7 +46,7 @@ int main(){
 
         for(int i=0; i< NM[0];i++){
             for (int j=0; j< NM[1];j++){
-                printf("%d ", matriz[i][j]);
+                //printf("%d ", matriz[i][j]);
                 /*if(matriz[i][j] == 1){ // percorre a matriz até achar uma das minhas peças
                     printf("Ola\n");
                     int vec[2] = {i,j};
@@ -59,7 +59,7 @@ int main(){
 
         
         liberarMatriz(matriz, NM);
-        printf("%d \n", MaxPecas);
+        //printf("%d \n", MaxPecas);
 
     }
     fclose(arq);
