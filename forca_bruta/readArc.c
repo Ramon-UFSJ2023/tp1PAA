@@ -10,12 +10,6 @@ int verify(int* vector){
     return 1;
 }
 
-void constMatriz(int ***matriz, int* vector){
-     *matriz = malloc(vector[0]* sizeof(int *));
-        for(int i=0; i< vector[0];i++)
-            (*matriz)[i] = malloc(sizeof(int) * vector[1]);
-}
-
 int verifyNumPecas(int *player1, int *player2, int *tamanho, char C){
     int sizeMatriz = tamanho[0]*tamanho[1];
     if(C == '1') *player1++;
@@ -31,29 +25,41 @@ void liberarMatriz(int **matriz, int *vector){
     free(matriz);
 }
 
-void verifyDia(int ***matriz, int* vector, int *contPecas){
+void verifyDia(int **matriz, int* vector, int *contPecas){
     int i = vector[0];
     int j = vector[1];
+    int aux1, aux2, aux3, aux4;
 
-    if(*matriz[i++][j++] == 1 && matriz[i+2][j+2] == 0){ // diagonal superior a direita
+    if(matriz[i++][j++] == 2 && matriz[i+2][j+2] == 0){ // diagonal superior a direita
         *contPecas++;
-        verifyDia(matriz, vector, contPecas);
+        int aux1=*contPecas;
+        verifyDia(matriz, vector, aux1);
     }
 
-    if(*matriz[i--][j--] == 1 && matriz[i-2][j-2] == 0){ // diagonal inferior a esquerda
+    if(matriz[i--][j--] == 2 && matriz[i-2][j-2] == 0){ // diagonal inferior a esquerda
         *contPecas++;
-        verifyDia(matriz, vector, contPecas);
+        int aux2=*contPecas;
+        verifyDia(matriz, vector, aux2);
     }
 
-    if(*matriz[i++][j--] == 1 && matriz[i+2][j-2] == 0){ // diagonal superior a esquerda
+    if(matriz[i++][j--] == 2 && matriz[i+2][j-2] == 0){ // diagonal superior a esquerda
         *contPecas++;
-        verifyDia(matriz, vector, contPecas);
+        int aux3=*contPecas;
+        verifyDia(matriz, vector, aux3);
     }
 
-    if(*matriz[i--][j++] == 1 && matriz[i-2][j+2] == 0){ // diagonl inferior a direita
+    if(matriz[i--][j++] == 2 && matriz[i-2][j+2] == 0){ // diagonl inferior a direita
         *contPecas++;
-        verifyDia(matriz, vector, contPecas);
+        int aux4=*contPecas;
+        verifyDia(matriz, vector, aux4);
     }
+    if(aux1 > aux2 && aux1> aux3 && aux1 > aux4) *contPecas = aux1;
+    if(aux2> aux3 && aux2 >aux4) *contPecas = aux2;
+    if(aux3 > aux4){*contPecas = aux3;}
+        else{ 
+            *contPecas = aux4; 
+        }
+    
     return;
 }
 
