@@ -26,8 +26,10 @@ int main(){
         constMatriz(&matriz, NM); // função que aloca a matriz multiplicando N*M
 
         while((charOfSecondLine = fgetc(arq)) != '\n'){ // leio proxima linha da entrada
+
             if(contColun > NM[1]-1){
                 contLine++;
+                printf("Teste\n");
                 if(contLine % 2 == 0){
                     contColun = 0;
                 }else{contColun = 1;} // garanto que as peças serão posicionadas em diagonal nas linhas
