@@ -1,0 +1,8 @@
+prog1: readArc.o
+gcc readArc.o -o prog1
+
+readArc.o: readArc.h readArc.c
+gcc -c readArc.c
+
+clean:
+rm -rf readArc.o prog1
