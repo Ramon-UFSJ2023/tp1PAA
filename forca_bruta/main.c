@@ -19,12 +19,13 @@ int main(){
         fscanf(arq, "%d %d", &NM[0], &NM[1]); // Leio o tamanho de linha e colunas do txt
         fgetc(arq); // captura o \r
         fgetc(arq); // captura o \n
-
+        int contPlayer1 = contPlayer2 = contLine = contColun = contEnter= 0;
         if(verify(NM) == 0) break; // função que verifica as condições
         int **matriz;
         constMatriz(&matriz, NM); // função que aloca a matriz multiplicando N*M
 
-        while((charOfSecondLine = fgetc(arq)) != '\n' || (charOfSecondLine = fgetc(arq)) != '\r'){ // leio proxima linha da entrada
+        while((charOfSecondLine = fgetc(arq)) != '\n'){
+            if (charOfSecondLine == '\r' || charOfSecondLine == EOF || contColun> NM[1] || contLine > NM[0]) break; // leio proxima linha da entrada
             if(contColun > NM[1]-1){
                 contLine++;
                 if(contLine % 2 == 0){
@@ -33,19 +34,14 @@ int main(){
             }
             contEnter++; // numero total da entrada de descrições
             if(verifyNumPecas(&contPlayer1, &contPlayer2, NM, charOfSecondLine) == 0) exit(1);
-            matriz[contLine][contColun]= charOfSecondLine; // necessario para conversão do caractere para Inteiro
+            matriz[contLine][contColun]= charOfSecondLine -'0'; // necessario para conversão do caractere para Inteiro
             contColun+= 2;
         }
-        printf("%d\n", fgetc(arq));
-
-
 
         if(contEnter != (int)ceil(NM[0]*NM[1]/2)){ // problema aq
             liberarMatriz(matriz, NM);
             break;
         }
-
-        printf("%d\n", fgetc(arq));
 
         for(int i=0; i< NM[0];i++){
             for (int j=0; j< NM[1];j++){ 
@@ -58,10 +54,9 @@ int main(){
             }
         }
         liberarMatriz(matriz, NM);
+        printf("%d \n", MaxPecas);
 
     }
-    printf("%d \n", MaxPecas);
-
     fclose(arq);
     return 0;
 }
