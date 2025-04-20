@@ -20,12 +20,13 @@ int verifyNumPecas(int *player1, int *player2, int *tamanho, char C){
 }
 
  int verifyDia(int linhas, int colunas, int matriz[linhas][colunas], int i, int j){
+    printf("Ola\n");
     const int diagonaisSimples[4][2] = {{+1,+1},{+1,-1},{-1,+1},{-1,-1}};
     int melhorCaminho=0;
 
     for(int dia = 0; dia<4; dia++){
         int di = diagonaisSimples[dia][0], dj = diagonaisSimples[dia][1]; // pega os valores das primeiras diagonais
-
+        
         int posiIniI = i+di;// pega minha posição que é passada por I e J e coloca que a posição inimiga é a adjacente na diagonal
         int posiIniJ = j+dj; 
 
