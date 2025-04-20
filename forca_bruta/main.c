@@ -4,7 +4,7 @@
 #include <math.h>
 
 int main(){
-    int NM[2], aux=0, MaxPecas=0;
+    int NM[2], aux, MaxPecas;
     char charOfSecondLine;
     FILE *arq = fopen("ent.txt", "r");
 
@@ -18,7 +18,8 @@ int main(){
         if((fscanf(arq, "%d %d", &NM[0], &NM[1])) != 2) break; // Leio o tamanho de linha e colunas do txt
         fgetc(arq); // captura o \r que so tem no win
         fgetc(arq); // captura o \n
-        
+        MaxPecas = 0;
+        aux =0;
         if(verify(NM) == 0) break;
         int matriz[NM[0]][NM[1]];
 
