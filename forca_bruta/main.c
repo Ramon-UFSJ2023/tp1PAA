@@ -4,7 +4,7 @@
 #include <math.h>
 
 int main(){
-    int NM[2], contPlayer1=0, contPlayer2=0, contLine=0, contColun=0, contEnter=0, aux=0, *MaxPecas=0;
+    int NM[2], contPlayer1=0, contPlayer2=0, contLine=0, contColun=0, contEnter=0, aux=0, MaxPecas=0;
     char charOfSecondLine;
     FILE *arq = fopen("ent.txt", "r");
 
@@ -41,12 +41,12 @@ int main(){
             for (int j=0; j< NM[1];j++){
                 if(matriz[i][j] == 1){ // percorre a matriz até achar uma das minhas peças
                     int vec[2] = {i,j};
-                    verifyDia(NM[0],NM[1], matriz, vec, MaxPecas); // modifico diretamente o valor de MaxPecas(Numero de peças comidas)
-                    if(*MaxPecas > aux) aux = *MaxPecas; //verifico qual peça minha consegue comer mais peças inimifas e coloco em aux
+                    verifyDia(NM[0],NM[1], matriz, vec, &MaxPecas); // modifico diretamente o valor de MaxPecas(Numero de peças comidas)
+                    if(MaxPecas > aux) aux = MaxPecas; //verifico qual peça minha consegue comer mais peças inimifas e coloco em aux
                 }
             }
         }
-        printf("%d \n", *MaxPecas);
+        printf("%d \n", MaxPecas);
     }
 
     fclose(arq);
