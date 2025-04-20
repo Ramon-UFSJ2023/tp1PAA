@@ -6,7 +6,7 @@ int verify(int* vector){
     if(vector[positionVector] == 0 && vector[positionVector+1] == 0) return 0;
     if(vector[positionVector]<3||vector[positionVector+1]<3) return 0;
     if(vector[positionVector]>20||vector[positionVector+1]>20) return 0;
-    if(vector[positionVector]*vector[positionVector]>200) return 0;
+    if(vector[positionVector]*vector[positionVector+1]>200) return 0;
     return 1;
 }
 
@@ -20,7 +20,6 @@ int verifyNumPecas(int *player1, int *player2, int *tamanho, char C){
 }
 
 int verifyDia(int linhas, int colunas, int matriz[linhas][colunas], int* vec){
-    printf("ola\n");
     int i = vec[0], j = vec[1];
     int x = i, y = j;
     int melhor = 0;
@@ -46,4 +45,13 @@ int verifyDia(int linhas, int colunas, int matriz[linhas][colunas], int* vec){
         if(captura > melhor) melhor = captura;
     }
     return melhor;
+}
+
+void readVector(int vector[], FILE *arq){
+    if((fscanf(arq, "%d %d", &vector[0], &vector[1])) != 2){
+        printf("Leitura deu errado.\n");
+        return;
+    }// Leio o tamanho de linha e colunas do txt
+    fgetc(arq); // captura o \r que so tem no win
+    fgetc(arq); // captura o \n
 }

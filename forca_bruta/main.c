@@ -15,15 +15,12 @@ int main(){
 
 
     while(1){
-        if((fscanf(arq, "%d %d", &NM[0], &NM[1])) != 2) break; // Leio o tamanho de linha e colunas do txt
-        fgetc(arq); // captura o \r que so tem no win
-        fgetc(arq); // captura o \n
+        readVector(NM, arq);
         MaxPecas = 0;
         aux =0;
-        if(verify(NM) == 0) break;
-        int matriz[NM[0]][NM[1]];
 
-        printf("%d %d \n", NM[0], NM[1]);
+        if(verify(NM) == 0) break; // Verificação das condições impostas no PDF do tp
+        int matriz[NM[0]][NM[1]];
 
         for(int i=0; i< NM[0];i++){
             for(int j = 0; j < NM[1]; j++){
