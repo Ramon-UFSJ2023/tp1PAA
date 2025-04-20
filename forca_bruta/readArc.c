@@ -19,17 +19,21 @@ int verifyNumPecas(int *player1, int *player2, int *tamanho, char C){
     return 1;
 }
 
-int verifyDia(int linhas, int colunas, int matriz[linhas][colunas], int i, int j){
+ int verifyDia(int linhas, int colunas, int matriz[linhas][colunas], int i, int j){
     const int diagonaisSimples[4][2] = {{+1,+1},{+1,-1},{-1,+1},{-1,-1}};
     int melhorCaminho=0;
 
     for(int dia = 0; dia<4; dia++){
         int di = diagonaisSimples[dia][0], dj = diagonaisSimples[dia][1]; // pega os valores das primeiras diagonais
-        int posiIniI = i+di, posiIniJ = j+dj; // pega minha posição que é passada por I e J e coloca que a posição inimiga é a adjacente na diagonal
-        int posiVagaI = i+(2*di), posiVagaJ = j+(2*dj);// faz a msm coisa explicada a cima só que posição vaga dps da peça inimiga
+        
+        int posiIniI = i+di;// pega minha posição que é passada por I e J e coloca que a posição inimiga é a adjacente na diagonal
+        int posiIniJ = j+dj; 
 
-        if((posiIniI<0 || posiIniI>= linhas) ||(posiIniJ <0 || posiIniJ >= colunas)) continue;// verificações de limite, separei em dois IFs para ficar legivel
-        if((posiVagaI<0 || posiVagaI >= linhas)||(posiVagaJ<0 || posiVagaJ>= colunas)) continue;
+        int posiVagaI = i+(2*di); // faz a msm coisa explicada a cima só que posição vaga dps da peça inimiga
+        int posiVagaJ = j+(2*dj);
+
+        if((posiIniI < 0 || posiIniI >= linhas) || (posiIniJ <0 || posiIniJ >= colunas)) continue;// verificações de limite, separei em dois IFs para ficar legivel
+        if((posiVagaI <0 || posiVagaI >= linhas)||(posiVagaJ<0 || posiVagaJ>= colunas)) continue;
 
         if(matriz[posiIniI][posiIniJ] == 2 && matriz[posiVagaI][posiVagaJ] == 0){ // verifico se a posição atribuida a posiIni e posiVaga são as descritas na documentação 2 e 0 respectivamente
             int captura = 1 + verifyDia(linhas, colunas, matriz, posiVagaI, posiVagaJ); // adiciono uma captura e chamo a função recursiva
@@ -43,9 +47,9 @@ void readVector(int vector[], FILE *arq){
     if((fscanf(arq, "%d %d", &vector[0], &vector[1])) != 2){
         printf("Leitura deu errado.\n");
         return;
-    }
-    fgetc(arq); // captura \r (Windowns)
-    fgetc(arq);// captura \n
+    } 
+    int c;
+    while((c = fgetc(arq)) != '\n' && c != EOF);
 }
 
 void readMatriz(int linha, int coluna, int matriz[linha][coluna], FILE *arq){

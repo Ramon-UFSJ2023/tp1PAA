@@ -4,7 +4,7 @@
 #include <math.h>
 
 int main(){
-    int NM[2]= {0,0}, aux, MaxPecas;
+    int NM[2], aux, MaxPecas;
     char charOfSecondLine;
     FILE *arq = fopen("ent.txt", "r");
 
@@ -16,13 +16,13 @@ int main(){
 
     while(1){
         readVector(NM, arq);
+        printf("%d %d\n", NM[0], NM[1]);
         if(verify(NM) == 0) break; // Verificação das condições impostas no PDF do tp
         MaxPecas = 0;
         aux =0;
 
         int matriz[NM[0]][NM[1]];
         readMatriz(NM[0], NM[1], matriz, arq);
-
         for(int i=0; i< NM[0];i++){
             for (int j=0; j< NM[1];j++){
                 if(matriz[i][j] == 1){ // percorre a matriz até achar uma das minhas peças
