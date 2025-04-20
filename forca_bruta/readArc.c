@@ -31,25 +31,19 @@ void verifyDia(int linhas, int colunas, int matriz[linhas][colunas], int* vec, i
         vec[0] = i+2;
         vec[1] = j+2;
         verifyDia(linhas, colunas,matriz, vec, &aux1);
-    }
-
-    if(matriz[x--][y--] == 2 && matriz[x-2][y-2] == 0){ // diagonal inferior a esquerda
+    }else if(matriz[x--][y--] == 2 && matriz[x-2][y-2] == 0){ // diagonal inferior a esquerda
         (*contPecas)++;
         aux2 = *contPecas;
         vec[0] = i-2;
         vec[1] = j-2;
         verifyDia(linhas, colunas,matriz, vec, &aux2);
-    }
-
-    if(matriz[x++][y--] == 2 && matriz[x+2][y-2] == 0){ // diagonal superior a esquerda
+    }else if(matriz[x++][y--] == 2 && matriz[x+2][y-2] == 0){ // diagonal superior a esquerda
         (*contPecas)++;
         aux3 = *contPecas;
         vec[0] = i+2;
         vec[1] = j-2;
         verifyDia(linhas, colunas,matriz, vec, &aux3);
-    }
-
-    if(matriz[x--][y++] == 2 && matriz[x-2][y+2] == 0){ // diagonl inferior a direita
+    }else if(matriz[x--][y++] == 2 && matriz[x-2][y+2] == 0){ // diagonl inferior a direita
         (*contPecas)++;
         aux4 = *contPecas;
         vec[0] = i-2;
