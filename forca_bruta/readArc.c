@@ -51,7 +51,18 @@ void readVector(int vector[], FILE *arq){
     if((fscanf(arq, "%d %d", &vector[0], &vector[1])) != 2){
         printf("Leitura deu errado.\n");
         return;
-    }// Leio o tamanho de linha e colunas do txt
-    fgetc(arq); // captura o \r que so tem no win
-    fgetc(arq); // captura o \n
+    }
+    
+}
+
+void readMatriz(int linha, int coluna, int matriz[linha][coluna], FILE *arq){
+    for(int i=0; i < linha;i++){
+        for(int j = 0; j < coluna; j++){
+            if((i+j)%2 == 0){
+                if((fscanf(arq, "%d ", &matriz[i][j])) != 1) break;
+            }else{
+                matriz[i][j] = -1;
+            }
+        }    
+    }
 }
