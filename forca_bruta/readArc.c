@@ -25,25 +25,23 @@ int verifyDias(int linhas, int colunas, int matriz[linhas][colunas], int* vec){
     int x = i, y = j;
     int melhor = 0;
     
-    if(matriz[x++][y++] == 2 && matriz[x+2][i+2] == 0){ // diagonal superior a direita
-        vec[0] = i+2;
-        vec[1] = j+2;
+    if(matriz[x++][y++] == 2 && (x++ < linhas && y++ < colunas)&& matriz[x+2][i+2] == 0 && (x+2 < linhas && y+2 < colunas)){ // diagonal superior a direita
+        int NewVec[2] = {i+2, j+2};
         int captura = 1+verifyDia(linhas, colunas,matriz, vec);
         if(captura > melhor) melhor = captura;
-    }else if(matriz[x--][y--] == 2 && matriz[x-2][y-2] == 0){ // diagonal inferior a esquerda
-        vec[0] = i-2;
-        vec[1] = j-2;
+    }
+    if(matriz[x--][y--] == 2 && (x-- >= 0 && y-- >= 0) && matriz[x-2][y-2] == 0 && (x-2 >=0 && y-2 >=0)){ // diagonal inferior a esquerda
+        int NewVec[2] = {i-2, j-2};
         int captura = 1+verifyDia(linhas, colunas,matriz, vec);
         if(captura > melhor) melhor = captura;
-    }else if(matriz[x++][y--] == 2 && matriz[x+2][y-2] == 0){ // diagonal superior a esquerda
-
-        vec[0] = i+2;
-        vec[1] = j-2;
+    }
+    if(matriz[x++][y--] == 2 && (x++ < linhas && y-- >= 0) && matriz[x+2][y-2] == 0 && (x+2 < linhas && y-2 >=0)){ // diagonal superior a esquerda
+        int NewVec[2] = {i+2, j-2};
         int captura = 1+verifyDia(linhas, colunas,matriz, vec);
         if(captura > melhor) melhor = captura;
-    }else if(matriz[x--][y++] == 2 && matriz[x-2][y+2] == 0){ // diagonl inferior a direita
-        vec[0] = i-2;
-        vec[1] = j+2;
+    }
+    if(matriz[x--][y++] == 2 && (x-- >= 0 && y++ < colunas)&& matriz[x-2][y+2] == 0 && (x+2 >=0 && y++ < colunas)){ // diagonl inferior a direita
+        int NewVec[2] = {i-2, j+2};
         int captura = 1+verifyDia(linhas, colunas,matriz, vec);
         if(captura > melhor) melhor = captura;
     }
