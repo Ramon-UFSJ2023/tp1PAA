@@ -22,9 +22,10 @@ int verifyNumPecas(int *player1, int *player2, int *tamanho, char C){
 void verifyDia(int linhas, int colunas, int matriz[linhas][colunas], int* vec, int *contPecas){
     printf("ola\n");
     int i = vec[0], j = vec[1];
+    int x = i, y = j;
     int aux1=0, aux2=0, aux3=0, aux4=0;
     
-    if(matriz[i++][j++] == 2 && matriz[i+2][j+2] == 0){ // diagonal superior a direita
+    if(matriz[x++][y++] == 2 && matriz[x+2][i+2] == 0){ // diagonal superior a direita
         (*contPecas)++;
         aux1 = *contPecas;
         vec[0] = i+2;
@@ -32,7 +33,7 @@ void verifyDia(int linhas, int colunas, int matriz[linhas][colunas], int* vec, i
         verifyDia(linhas, colunas,matriz, vec, &aux1);
     }
 
-    if(matriz[i--][j--] == 2 && matriz[i-2][j-2] == 0){ // diagonal inferior a esquerda
+    if(matriz[x--][y--] == 2 && matriz[x-2][y-2] == 0){ // diagonal inferior a esquerda
         (*contPecas)++;
         aux2 = *contPecas;
         vec[0] = i-2;
@@ -40,7 +41,7 @@ void verifyDia(int linhas, int colunas, int matriz[linhas][colunas], int* vec, i
         verifyDia(linhas, colunas,matriz, vec, &aux2);
     }
 
-    if(matriz[i++][j--] == 2 && matriz[i+2][j-2] == 0){ // diagonal superior a esquerda
+    if(matriz[x++][y--] == 2 && matriz[x+2][y-2] == 0){ // diagonal superior a esquerda
         (*contPecas)++;
         aux3 = *contPecas;
         vec[0] = i+2;
@@ -48,7 +49,7 @@ void verifyDia(int linhas, int colunas, int matriz[linhas][colunas], int* vec, i
         verifyDia(linhas, colunas,matriz, vec, &aux3);
     }
 
-    if(matriz[i--][j++] == 2 && matriz[i-2][j+2] == 0){ // diagonl inferior a direita
+    if(matriz[x--][y++] == 2 && matriz[x-2][y+2] == 0){ // diagonl inferior a direita
         (*contPecas)++;
         aux4 = *contPecas;
         vec[0] = i-2;
