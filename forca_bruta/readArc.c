@@ -19,32 +19,24 @@ int verifyNumPecas(int *player1, int *player2, int *tamanho, char C){
     return 1;
 }
 
-int verifyDia(int linhas, int colunas, int matriz[linhas][colunas], int* vec){
-    int i = vec[0], j = vec[1];
-    int x = i, y = j;
-    int melhor = 0;
-    
-    if(matriz[x++][y++] == 2 && (x++ < linhas && y++ < colunas)&& matriz[x+2][i+2] == 0 && (x+2 < linhas && y+2 < colunas)){ // diagonal superior a direita
-        int NewVec[2] = {i+2, j+2};
-        int captura = 1+verifyDia(linhas, colunas,matriz, vec);
-        if(captura > melhor) melhor = captura;
+int verifyDia(int linhas, int colunas, int matriz[linhas][colunas], int i, int j){
+    const int diagonaisSimples[4][2] = {{+1,+1},{+1,-1},{-1,+1},{-1,-1}};
+    int melhorCaminho=0;
+
+    for(int dia = 0; dia<4; dia++){
+        int di = diagonaisSimples[dia][0], dj = diagonaisSimples[dia][1]; // pega os valores das primeiras diagonais
+        int posiIniI = i+di, posiIniJ = j+dj; // pega minha posição que é passada por I e J e coloca que a posição inimiga é a adjacente na diagonal
+        int posiVagaI = i+(2*di), posiVagaJ = j+(2*dj);// faz a msm coisa explicada a cima só que posição vaga dps da peça inimiga
+
+        if((posiIniI<0 || posiIniI>= linhas) ||(posiIniJ <0 || posiIniJ >= colunas)) continue;// verificações de limite, separei em dois IFs para ficar legivel
+        if((posiVagaI<0 || posiVagaI >= linhas)||(posiVagaJ<0 || posiVagaJ>= colunas)) continue;
+
+        if(matriz[posiIniI][posiIniJ] == 2 && matriz[posiVagaI][posiVagaJ] == 0){
+            int captura = 1 + verifyDia(linhas, colunas, matriz, posiVagaI, posiVagaJ);
+            if(captura > melhorCaminho) melhorCaminho = captura;
+        }
     }
-    if(matriz[x--][y--] == 2 && (x-- >= 0 && y-- >= 0) && matriz[x-2][y-2] == 0 && (x-2 >=0 && y-2 >=0)){ // diagonal inferior a esquerda
-        int NewVec[2] = {i-2, j-2};
-        int captura = 1+verifyDia(linhas, colunas,matriz, vec);
-        if(captura > melhor) melhor = captura;
-    }
-    if(matriz[x++][y--] == 2 && (x++ < linhas && y-- >= 0) && matriz[x+2][y-2] == 0 && (x+2 < linhas && y-2 >=0)){ // diagonal superior a esquerda
-        int NewVec[2] = {i+2, j-2};
-        int captura = 1+verifyDia(linhas, colunas,matriz, vec);
-        if(captura > melhor) melhor = captura;
-    }
-    if(matriz[x--][y++] == 2 && (x-- >= 0 && y++ < colunas)&& matriz[x-2][y+2] == 0 && (x+2 >=0 && y++ < colunas)){ // diagonl inferior a direita
-        int NewVec[2] = {i-2, j+2};
-        int captura = 1+verifyDia(linhas, colunas,matriz, vec);
-        if(captura > melhor) melhor = captura;
-    }
-    return melhor;
+    return melhorCaminho;
 }
 
 void readVector(int vector[], FILE *arq){
