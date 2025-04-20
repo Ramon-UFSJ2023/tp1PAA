@@ -19,7 +19,7 @@ int verifyNumPecas(int *player1, int *player2, int *tamanho, char C){
     return 1;
 }
 
-int verifyDias(int linhas, int colunas, int matriz[linhas][colunas], int* vec){
+int verifyDia(int linhas, int colunas, int matriz[linhas][colunas], int* vec){
     printf("ola\n");
     int i = vec[0], j = vec[1];
     int x = i, y = j;
