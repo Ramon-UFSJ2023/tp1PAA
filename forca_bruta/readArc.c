@@ -25,8 +25,9 @@ int verifyNumPecas(int *player1, int *player2, int *tamanho, char C){
     int melhorCaminho=0;
 
     for(int dia = 0; dia<4; dia++){
-        int di = diagonaisSimples[dia][0], dj = diagonaisSimples[dia][1]; // pega os valores das primeiras diagonais
-        printf("Ola\n");
+        int di = diagonaisSimples[dia][0]; // pega os valores das primeiras diagonais
+        int dj = diagonaisSimples[dia][1];
+
         int posiIniI = i+di;// pega minha posição que é passada por I e J e coloca que a posição inimiga é a adjacente na diagonal
         int posiIniJ = j+dj; 
 
