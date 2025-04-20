@@ -31,9 +31,9 @@ int verifyDia(int linhas, int colunas, int matriz[linhas][colunas], int i, int j
         if((posiIniI<0 || posiIniI>= linhas) ||(posiIniJ <0 || posiIniJ >= colunas)) continue;// verificações de limite, separei em dois IFs para ficar legivel
         if((posiVagaI<0 || posiVagaI >= linhas)||(posiVagaJ<0 || posiVagaJ>= colunas)) continue;
 
-        if(matriz[posiIniI][posiIniJ] == 2 && matriz[posiVagaI][posiVagaJ] == 0){
-            int captura = 1 + verifyDia(linhas, colunas, matriz, posiVagaI, posiVagaJ);
-            if(captura > melhorCaminho) melhorCaminho = captura;
+        if(matriz[posiIniI][posiIniJ] == 2 && matriz[posiVagaI][posiVagaJ] == 0){ // verifico se a posição atribuida a posiIni e posiVaga são as descritas na documentação 2 e 0 respectivamente
+            int captura = 1 + verifyDia(linhas, colunas, matriz, posiVagaI, posiVagaJ); // adiciono uma captura e chamo a função recursiva
+            if(captura > melhorCaminho) melhorCaminho = captura; // se a sequencia for melhor que a anterior vc atualiza qual é o melhor caminho a seguir
         }
     }
     return melhorCaminho;
