@@ -37,8 +37,8 @@ int main(){
             for (int j=0; j< NM[1];j++){
                 if(matriz[i][j] == 1){ // percorre a matriz até achar uma das minhas peças
                     int vec[2] = {i,j};
-                    verifyDia(NM[0],NM[1], matriz, vec, &MaxPecas); // modifico diretamente o valor de MaxPecas(Numero de peças comidas)
-                    if(MaxPecas > aux) aux = MaxPecas; //verifico qual peça minha consegue comer mais peças inimifas e coloco em aux
+                    aux = verifyDia(NM[0],NM[1], matriz, vec); // modifico diretamente o valor de MaxPecas(Numero de peças comidas)
+                    if(aux > MaxPecas) MaxPecas = aux; //verifico qual peça minha consegue comer mais peças inimifas e coloco em aux
                 }
             }
         }

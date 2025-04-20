@@ -19,43 +19,35 @@ int verifyNumPecas(int *player1, int *player2, int *tamanho, char C){
     return 1;
 }
 
-void verifyDia(int linhas, int colunas, int matriz[linhas][colunas], int* vec, int *contPecas){
+int verifyDia(int linhas, int colunas, int matriz[linhas][colunas], int* vec){
     printf("ola\n");
     int i = vec[0], j = vec[1];
     int x = i, y = j;
-    int aux1=0, aux2=0, aux3=0, aux4=0;
+    int melhor = 0;
     
     if(matriz[x++][y++] == 2 && matriz[x+2][i+2] == 0){ // diagonal superior a direita
-        (*contPecas)++;
-        aux1 = *contPecas;
         vec[0] = i+2;
         vec[1] = j+2;
-        verifyDia(linhas, colunas,matriz, vec, &aux1);
+        int captura = 1+verifyDia(linhas, colunas,matriz, vec);
+        if(captura > melhor) melhor = captura;
     }else if(matriz[x--][y--] == 2 && matriz[x-2][y-2] == 0){ // diagonal inferior a esquerda
-        (*contPecas)++;
-        aux2 = *contPecas;
+
         vec[0] = i-2;
         vec[1] = j-2;
-        verifyDia(linhas, colunas,matriz, vec, &aux2);
+        int captura = 1+verifyDia(linhas, colunas,matriz, vec);
+        if(captura > melhor) melhor = captura;
     }else if(matriz[x++][y--] == 2 && matriz[x+2][y-2] == 0){ // diagonal superior a esquerda
-        (*contPecas)++;
-        aux3 = *contPecas;
+
         vec[0] = i+2;
         vec[1] = j-2;
-        verifyDia(linhas, colunas,matriz, vec, &aux3);
+        int captura = 1+verifyDia(linhas, colunas,matriz, vec);
+        if(captura > melhor) melhor = captura;
     }else if(matriz[x--][y++] == 2 && matriz[x-2][y+2] == 0){ // diagonl inferior a direita
-        (*contPecas)++;
-        aux4 = *contPecas;
         vec[0] = i-2;
         vec[1] = j+2;
-        verifyDia(linhas, colunas,matriz, vec, &aux4);
+        int captura = 1+verifyDia(linhas, colunas,matriz, vec);
+        if(captura > melhor) melhor = captura;
     }
-
-    if(aux1 > aux2 && aux1> aux3 && aux1 > aux4) *contPecas = aux1;
-    if(aux2> aux3 && aux2 >aux4) *contPecas = aux2;
-    if(aux3 > aux4){*contPecas = aux3;}
-        else{ *contPecas = aux4; }
-    
-    return;
+    return melhor;
 }
 
