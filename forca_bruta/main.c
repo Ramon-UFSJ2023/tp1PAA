@@ -25,12 +25,13 @@ int main(){
         readMatriz(NM[0], NM[1], matriz, arq);
         for(int i=0; i< NM[0];i++){
             for (int j=0; j< NM[1];j++){
+                printf("%d ", matriz[i][j]);
                 if(matriz[i][j] == 1){ // percorre a matriz até achar uma das minhas peças
                     int vec[2] = {i,j};
-                    aux = verifyDia(NM[0],NM[1], matriz, i, j); // modifico diretamente o valor de MaxPecas(Numero de peças comidas)
+                    //aux = verifyDia(NM[0],NM[1], matriz, i, j); // modifico diretamente o valor de MaxPecas(Numero de peças comidas)
                     if(aux > MaxPecas) MaxPecas = aux; //verifico qual peça minha consegue comer mais peças inimifas e coloco em aux
                 }
-            }
+            }printf("\n");
         }
         printf("%d \n", MaxPecas);
     }
