@@ -52,7 +52,8 @@ void readVector(int vector[], FILE *arq){
         printf("Leitura deu errado.\n");
         return;
     }
-    
+    fgetc(arq); // captura \r (Windowns)
+    fgetc(arq);// captura \n
 }
 
 void readMatriz(int linha, int coluna, int matriz[linha][coluna], FILE *arq){
