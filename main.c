@@ -34,7 +34,7 @@ int main(){
             exit(EXIT_FAILURE);
         }
 
-        int max_captures = findMaxCaptures(t, 1); //Algoritmo euristico
+        int max_captures = findMaxCaptures(t, 1); //Algoritmo Euristico
         printf("%d\n", max_captures);
 
         if (gettimeofday(&time_end1, NULL) != 0) {
@@ -42,7 +42,7 @@ int main(){
             exit(EXIT_FAILURE);
         }
         long sec1=time_end1.tv_sec-time_start1.tv_sec;
-        
+
         //separação de algoritmos
 
         printf("Tempo com algoritmo Força Bruta: \n");
