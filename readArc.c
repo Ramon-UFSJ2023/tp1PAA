@@ -11,15 +11,6 @@ int verify(int* vector){
     return 1;
 }
 
-int verifyNumPecas(int *player1, int *player2, int *tamanho, char C){
-    int sizeMatriz = tamanho[0]*tamanho[1];
-    if(C == '1') (*player1)++;
-    if(C == '2') (*player2)++;
-
-    if(sizeMatriz/4 < *player1 || sizeMatriz/4 < *player2) return 0;
-    return 1;
-}
-
  int verifyDia(int linhas, int colunas, int matriz[linhas][colunas], int i, int j){
     
     const int diagonaisSimples[4][2] = {{+1,+1},{+1,-1},{-1,+1},{-1,-1}};
