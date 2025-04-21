@@ -1,38 +1,63 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "readArc.h"
+#include "board.h"
+#include "capture.h"
+#include <sys/time.h>
+#include <unistd.h>
 #include <math.h>
 
 int main(){
-    int NM[2], aux, MaxPecas;
+    int NM[2], FBruta, Euristico;
     char charOfSecondLine;
     FILE *arq = fopen("ent.txt", "r");
+
+    struct timeval time_start1, time_end1, time_start2, time_end2;
 
     if(arq == NULL){
         printf("Error, Arquivo Inexistente.\n");
         return 0;
     }
 
-
     while(1){
-        readVector(NM, arq);
+        readVector(NM, arq); // leitura da primeira linha feita pelo Ramon
         if(verify(NM) == 0) break; // Verificação das condições impostas no PDF do tp
-        
-        MaxPecas = 0;
-        aux =0;
 
+        Board *t = createBoard(NM[0], NM[1]); // função criada pela Julia
+        readBoard(t, arq); // utilizei a leitura da linha subsequente a da definição do tabuleiro feita pela julia
         int matriz[NM[0]][NM[1]];
-        readMatriz(NM[0], NM[1], matriz, arq);
-        for(int i=0; i< NM[0];i++){
-            for (int j=0; j< NM[1];j++){
-                if(matriz[i][j] == 1){ // percorre a matriz até achar uma das minhas peças
-                    int vec[2] = {i,j};
-                    aux = verifyDia(NM[0],NM[1], matriz, i, j); // modifico diretamente o valor de MaxPecas(Numero de peças comidas)
-                    if(aux > MaxPecas) MaxPecas = aux; //verifico qual peça minha consegue comer mais peças inimifas e coloco em aux
-                }
-            }
+        copMat(NM[0],NM[1], t, matriz);
+
+        if (gettimeofday(&time_start1, NULL) != 0) {
+            perror("gettimeofday");
+            exit(EXIT_FAILURE);
         }
-        printf("%d \n", MaxPecas);
+
+        int max_captures = findMaxCaptures(t, 1); //Algoritmo euristico
+        printf("%d\n", max_captures);
+
+        if (gettimeofday(&time_end1, NULL) != 0) {
+            perror("gettimeofday");
+            exit(EXIT_FAILURE);
+        }
+
+
+        //separação de algoritmos
+
+
+        if (gettimeofday(&time_start2, NULL) != 0) {
+            perror("gettimeofday");
+            exit(EXIT_FAILURE);
+        }
+
+        int maxPecas = algForBru(NM[0], NM[1], matriz); //algoritmo força bruta
+        printf("%d \n", maxPecas);
+
+        if (gettimeofday(&time_end2, NULL) != 0) {
+            perror("gettimeofday");
+            exit(EXIT_FAILURE);
+        }
+
     }
 
     fclose(arq);

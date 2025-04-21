@@ -1,5 +1,6 @@
 
 #include "readArc.h"
+#include "board.h"
 
 int verify(int* vector){
     int positionVector=0;
@@ -45,6 +46,20 @@ int verifyNumPecas(int *player1, int *player2, int *tamanho, char C){
     return melhorCaminho;
 }
 
+int algForBru(int linha, int coluna, int matriz[linha][coluna]){
+    int aux=0, max=0;
+    for(int i=0; i< linha;i++){
+        for(int j=0; j< coluna;j++){
+            if(matriz[i][j] == 1){ // percorre a matriz até achar uma das minhas peças
+                int vec[2] = {i,j};
+                aux = verifyDia(linha,coluna, matriz, i, j); // modifico diretamente o valor de MaxPecas(Numero de peças comidas)
+                if(aux > max) max = aux; //verifico qual peça minha consegue comer mais peças inimifas e coloco em aux
+            }
+        }
+    }
+    return max;
+}
+
 void readVector(int vector[], FILE *arq){
     if((fscanf(arq, "%d %d", &vector[0], &vector[1])) != 2){
         printf("Leitura deu errado.\n");
@@ -63,5 +78,13 @@ void readMatriz(int linha, int coluna, int matriz[linha][coluna], FILE *arq){
                 matriz[i][j] = -1;
             }
         }    
+    }
+}
+
+void copMat(int linha, int coluna, Board *t, int matriz[linha][coluna]){
+    for(int i=0; i<linha; i++){
+        for(int j=0; j<coluna; j++){
+            matriz[i][j] = t->board[i][j];
+        }
     }
 }
