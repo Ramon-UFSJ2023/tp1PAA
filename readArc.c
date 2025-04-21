@@ -43,7 +43,7 @@ int algForBru(int linha, int coluna, int matriz[linha][coluna]){
         for(int j=0; j< coluna;j++){
             if(matriz[i][j] == 1){ // percorre a matriz até achar uma das minhas peças
                 int vec[2] = {i,j};
-                aux = verifyDia(linha,coluna, matriz, i, j); // modifico diretamente o valor de MaxPecas(Numero de peças comidas)
+                aux = verifyDia(linha,coluna, matriz, i, j);
                 if(aux > max) max = aux; //verifico qual peça minha consegue comer mais peças inimifas e coloco em aux
             }
         }

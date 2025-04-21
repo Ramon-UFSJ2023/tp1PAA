@@ -26,7 +26,7 @@ int main(){
         Board *t = createBoard(NM[0], NM[1]); // função criada pela Julia
         readBoard(t, arq); // utilizei a leitura da linha subsequente a da definição do tabuleiro feita pela julia
         int matriz[NM[0]][NM[1]];
-        copMat(NM[0],NM[1], t, matriz);
+        copMat(NM[0],NM[1], t, matriz); // função feita para copiar a matriz e poder utiliza nos dois algoritmos
 
         printf("Tempo com algoritmo Euristico: \n");
         if (gettimeofday(&time_start1, NULL) != 0) {
