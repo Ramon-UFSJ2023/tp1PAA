@@ -1,6 +1,6 @@
 CC = gcc
 CFLAGS = -Wall -Wextra -O2
-OBJS = main.o readArc.o
+OBJS = main.o board.o capture.o
 TARGET = tp1
 
 all: $(TARGET)
@@ -8,8 +8,9 @@ all: $(TARGET)
 $(TARGET): $(OBJS)
 	$(CC) $(CFLAGS) -o $(TARGET) $(OBJS)
 
-main.o: main.c readArc.h
-readArc.o: readArc.o readArc.h
+main.o: main.c board.h capture.h
+board.o: board.c board.h
+capture.o: capture.c board.h capture.h
 
 clean:
 	rm -f $(OBJS) $(TARGET)
