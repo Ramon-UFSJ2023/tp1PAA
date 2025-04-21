@@ -28,6 +28,7 @@ int main(){
         int matriz[NM[0]][NM[1]];
         copMat(NM[0],NM[1], t, matriz);
 
+        printf("Tempo com algoritmo Euristico: \n");
         if (gettimeofday(&time_start1, NULL) != 0) {
             perror("gettimeofday");
             exit(EXIT_FAILURE);
@@ -40,11 +41,11 @@ int main(){
             perror("gettimeofday");
             exit(EXIT_FAILURE);
         }
-
-
+        long sec1=time_end1.tv_sec-time_start1.tv_sec;
+        
         //separação de algoritmos
 
-
+        printf("Tempo com algoritmo Força Bruta: \n");
         if (gettimeofday(&time_start2, NULL) != 0) {
             perror("gettimeofday");
             exit(EXIT_FAILURE);
@@ -57,6 +58,7 @@ int main(){
             perror("gettimeofday");
             exit(EXIT_FAILURE);
         }
+        long sec2=time_end2.tv_sec-time_start2.tv_sec;
 
     }
 
