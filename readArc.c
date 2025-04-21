@@ -79,7 +79,7 @@ void readMatriz(int linha, int coluna, int matriz[linha][coluna], FILE *arq){
             }
         }    
     }
-}
+} // função feita para ler os arquivos e preencher a matriz no caso de força bruta, mas após a mesclas de codigos ela foi inutilizada, mas deixei aqui para caso necessario
 
 void copMat(int linha, int coluna, Board *t, int matriz[linha][coluna]){
     for(int i=0; i<linha; i++){
