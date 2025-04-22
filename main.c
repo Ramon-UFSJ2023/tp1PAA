@@ -18,9 +18,11 @@ int main(){
         printf("Error, Arquivo Inexistente.\n");
         return 0;
     }
+    int choose=0;
+
 
     while(1){
-        
+
         readVector(NM, arq); // leitura da primeira linha feita pelo Ramon
         if(verify(NM) == 0) break; // Verificação das condições impostas no PDF do tp
 
@@ -29,37 +31,46 @@ int main(){
         int matriz[NM[0]][NM[1]];
         copMat(NM[0],NM[1], t, matriz); // função feita para copiar a matriz e poder utiliza nos dois algoritmos
 
-        printf("Tempo com algoritmo Euristico: \n");
-        if (gettimeofday(&time_start1, NULL) != 0) {
-            perror("gettimeofday");
-            exit(EXIT_FAILURE);
+        printf("Escolha 1 para algoritmo Euristico\nEscolha 2 para algoritmo ForçaBruta\n");
+        scanf("%d", &choose);
+        switch (choose){
+
+        case 1:
+            printf("Tempo com algoritmo Euristico: \n");
+            if (gettimeofday(&time_start1, NULL) != 0) {
+                perror("gettimeofday");
+                exit(EXIT_FAILURE);
+            }
+
+            int max_captures = findMaxCaptures(t, 1); //Algoritmo Euristico
+            printf("%d\n", max_captures);
+
+            if (gettimeofday(&time_end1, NULL) != 0) {
+                perror("gettimeofday");
+                exit(EXIT_FAILURE);
+            }
+            long sec1=time_end1.tv_sec-time_start1.tv_sec;
+            break;
+
+        case 2:
+            printf("Tempo com algoritmo Força Bruta: \n");
+            if (gettimeofday(&time_start2, NULL) != 0) {
+                perror("gettimeofday");
+                exit(EXIT_FAILURE);
+            }
+
+            int maxPecas = algForBru(NM[0], NM[1], matriz); //algoritmo força bruta
+            printf("%d \n", maxPecas);
+
+            if (gettimeofday(&time_end2, NULL) != 0) {
+                perror("gettimeofday");
+                exit(EXIT_FAILURE);
+            }
+            long sec2=time_end2.tv_sec-time_start2.tv_sec;
+            break;
+        default:
+            break;
         }
-
-        int max_captures = findMaxCaptures(t, 1); //Algoritmo Euristico
-        printf("%d\n", max_captures);
-
-        if (gettimeofday(&time_end1, NULL) != 0) {
-            perror("gettimeofday");
-            exit(EXIT_FAILURE);
-        }
-        long sec1=time_end1.tv_sec-time_start1.tv_sec;
-
-        //separação de algoritmos
-
-        printf("Tempo com algoritmo Força Bruta: \n");
-        if (gettimeofday(&time_start2, NULL) != 0) {
-            perror("gettimeofday");
-            exit(EXIT_FAILURE);
-        }
-
-        int maxPecas = algForBru(NM[0], NM[1], matriz); //algoritmo força bruta
-        printf("%d \n", maxPecas);
-
-        if (gettimeofday(&time_end2, NULL) != 0) {
-            perror("gettimeofday");
-            exit(EXIT_FAILURE);
-        }
-        long sec2=time_end2.tv_sec-time_start2.tv_sec;
 
     }
 
