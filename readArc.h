@@ -3,7 +3,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <board.h>
+#include "board.h"
 
 int verify(int* vector);
 int verifyNumPecas(int *pecasPlayer1, int *pecasPlayer2, int *tamanho, char c);
