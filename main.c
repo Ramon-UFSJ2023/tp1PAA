@@ -20,6 +20,7 @@ int main(){
     }
 
     while(1){
+        
         readVector(NM, arq); // leitura da primeira linha feita pelo Ramon
         if(verify(NM) == 0) break; // Verificação das condições impostas no PDF do tp
 
