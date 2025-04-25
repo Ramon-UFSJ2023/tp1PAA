@@ -46,7 +46,7 @@ int main(){
 
             getrusage(RUSAGE_SELF, &ru_end);
             gettimeofday(&time_end, NULL);
-
+            printf("Tempo com algoritmo Euristico: \n");
             printf("Tempo de Usuario: %ld\n", (ru_end.ru_utime.tv_sec-ru_start.ru_utime.tv_sec));
             printf("Tempo de Sistema: %ld\n", (time_end.ru_stime.tv_sec-time_start.ru_stime.tv_sec));
 
@@ -57,11 +57,11 @@ int main(){
             gettimeofday(&time_start, NULL);
 
             int maxPecas = algForBru(NM[0], NM[1], matriz); //algoritmo força bruta
-            fprintf(arqOut, "%d\n", max_captures);
+            fprintf(arqOut, "%d\n", maxPecas);
 
             getrusage(RUSAGE_SELF, &ru_end);
             gettimeofday(&time_end, NULL);
-            
+            printf("Tempo com algoritmo Força Bruta: \n");
             printf("Tempo de Usuario: %ld\n", (ru_end.ru_utime.tv_sec-ru_start.ru_utime.tv_sec));
             printf("Tempo de Sistema: %ld\n", (time_end.ru_stime.tv_sec-time_start.ru_stime.tv_sec));
 
@@ -70,13 +70,6 @@ int main(){
         default:
             break;
         }
-        printf("Tempo com algoritmo Euristico: \n");
-        printf("")
-
-        printf("Tempo com algoritmo Força Bruta: \n");
-
-
-
     }
 
     fclose(arq);
