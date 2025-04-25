@@ -1,2 +1,2 @@
-Para execução do programa só é necessario dar make e após isso executar no terminal o seguinte comando "./tp1". 
+Para execução do programa só é necessario dar make e após isso executar no terminal o seguinte comando "./tp1". Após isso você ira decidir qual algoritmo ira usar 1 - Força Bruta 2 -Euristica
 A saida e entrada são lidas e escritas automaticamente nos txt já criados breviamente.
