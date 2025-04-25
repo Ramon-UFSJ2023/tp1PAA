@@ -14,7 +14,7 @@ int main(){
     FILE *arqOut = fopen("saida.txt", "w");
 
     struct timeval time_start, time_end;
-    //struct rusage ru_start, ru_end;
+    struct rusage ru_start, ru_end;
 
 
     if(arq == NULL){
@@ -26,7 +26,6 @@ int main(){
     scanf("%d", &choose);
 
     while(1){
-
         readVector(NM, arq); // leitura da primeira linha feita pelo Ramon
         if(verify(NM) == 0) break; // Verificação das condições impostas no PDF do tp
 
@@ -49,7 +48,8 @@ int main(){
 
             printf("Tempo com algoritmo Euristico: \n");
             printf("Tempo de Usuario: %ld\n", (ru_end.ru_utime.tv_sec-ru_start.ru_utime.tv_sec));
-            printf("Tempo de Sistema: %ld\n", (time_end.ru_stime.tv_sec-time_start.ru_stime.tv_sec));
+            printf("Tempo de Sistema: %ld\n", (ru_end.ru_stime.tv_sec-time_start.ru_stime.tv_sec));
+            printf("Tempo Total: %ld\n", (time_end.tv_sec-time_start.tv_sec));
 
             break;
 
@@ -62,10 +62,12 @@ int main(){
 
             getrusage(RUSAGE_SELF, &ru_end);
             gettimeofday(&time_end, NULL);
-            
+
             printf("Tempo com algoritmo Força Bruta: \n");
             printf("Tempo de Usuario: %ld\n", (ru_end.ru_utime.tv_sec-ru_start.ru_utime.tv_sec));
-            printf("Tempo de Sistema: %ld\n", (time_end.ru_stime.tv_sec-time_start.ru_stime.tv_sec));
+            printf("Tempo de Sistema: %ld\n", (ru_end.ru_stime.tv_sec-ru_start.ru_stime.tv_sec));
+            printf("Tempo Total: %ld\n", (time_end.tv_sec-time_start.tv_sec));
+
 
             break;
 
