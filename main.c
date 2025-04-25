@@ -13,8 +13,9 @@ int main(){
     FILE *arq = fopen("ent.txt", "r");
     FILE *arqOut = fopen("saida.txt", "w");
 
-    struct timeval time_start1, time_end1, time_start2, time_end2;
+    struct timeval time_start, time_end;
     struct rusage ru_start, ru_end;
+
 
     if(arq == NULL){
         printf("Error, Arquivo Inexistente.\n");
@@ -37,42 +38,33 @@ int main(){
         switch (choose){
 
         case 1:
+            getrusage(RUSAGE_SELF, &ru_start);
+            gettimeofday(&time_start, NULL);
             
-            if (gettimeofday(&time_start1, NULL) != 0) {
-                perror("gettimeofday");
-                exit(EXIT_FAILURE);
-            }
-
             int max_captures = findMaxCaptures(t, 1); //Algoritmo Euristico
             fprintf(arqOut, "%d\n", max_captures);
 
-            if (gettimeofday(&time_end1, NULL) != 0) {
-                perror("gettimeofday");
-                exit(EXIT_FAILURE);
-            }
+            getrusage(RUSAGE_SELF, &ru_end);
+            gettimeofday(&time_end, NULL);
 
-            if (getrusage(RUSAGE_SELF, &usage) != 0) {
-                perror("getrusage");
-                exit(EXIT_FAILURE);
-            }
-            long sec1=time_end1.tv_sec-time_start1.tv_sec;
+            printf("Tempo de Usuario: %ld\n", (ru_end.ru_utime.tv_sec-ru_start.ru_utime.tv_sec));
+            printf("Tempo de Sistema: %ld\n", (time_end.ru_stime.tv_sec-time_start.ru_stime.tv_sec));
+
             break;
 
         case 2:
-
-            if (gettimeofday(&time_start2, NULL) != 0) {
-                perror("gettimeofday");
-                exit(EXIT_FAILURE);
-            }
+            getrusage(RUSAGE_SELF, &ru_start);
+            gettimeofday(&time_start, NULL);
 
             int maxPecas = algForBru(NM[0], NM[1], matriz); //algoritmo força bruta
             fprintf(arqOut, "%d\n", max_captures);
 
-            if (gettimeofday(&time_end2, NULL) != 0) {
-                perror("gettimeofday");
-                exit(EXIT_FAILURE);
-            }
-            long sec2=time_end2.tv_sec-time_start2.tv_sec;
+            getrusage(RUSAGE_SELF, &ru_end);
+            gettimeofday(&time_end, NULL);
+            
+            printf("Tempo de Usuario: %ld\n", (ru_end.ru_utime.tv_sec-ru_start.ru_utime.tv_sec));
+            printf("Tempo de Sistema: %ld\n", (time_end.ru_stime.tv_sec-time_start.ru_stime.tv_sec));
+
             break;
 
         default:
