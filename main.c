@@ -8,8 +8,7 @@
 #include <math.h>
 
 int main(){
-    int NM[2], FBruta, Euristico;
-    char charOfSecondLine;
+    int NM[2];
     FILE *arq = fopen("ent.txt", "r");
 
     struct timeval time_start1, time_end1, time_start2, time_end2;
