@@ -14,7 +14,7 @@ int main(){
     FILE *arqOut = fopen("saida.txt", "w");
 
     struct timeval time_start, time_end;
-    struct rusage ru_start, ru_end;
+    //struct rusage ru_start, ru_end;
 
 
     if(arq == NULL){
@@ -39,13 +39,14 @@ int main(){
 
         case 1:
             getrusage(RUSAGE_SELF, &ru_start);
-            gettimeofday(&time_start, NULL);
+            gettimeofday(&time_start, NULL);*/
             
             int max_captures = findMaxCaptures(t, 1); //Algoritmo Euristico
             fprintf(arqOut, "%d\n", max_captures);
 
             getrusage(RUSAGE_SELF, &ru_end);
             gettimeofday(&time_end, NULL);
+
             printf("Tempo com algoritmo Euristico: \n");
             printf("Tempo de Usuario: %ld\n", (ru_end.ru_utime.tv_sec-ru_start.ru_utime.tv_sec));
             printf("Tempo de Sistema: %ld\n", (time_end.ru_stime.tv_sec-time_start.ru_stime.tv_sec));
@@ -55,12 +56,13 @@ int main(){
         case 2:
             getrusage(RUSAGE_SELF, &ru_start);
             gettimeofday(&time_start, NULL);
-
+            // tamanho maximo de tabuleiro suportada é 3x4
             int maxPecas = algForBru(NM[0], NM[1], matriz); //algoritmo força bruta
             fprintf(arqOut, "%d\n", maxPecas);
 
             getrusage(RUSAGE_SELF, &ru_end);
             gettimeofday(&time_end, NULL);
+            
             printf("Tempo com algoritmo Força Bruta: \n");
             printf("Tempo de Usuario: %ld\n", (ru_end.ru_utime.tv_sec-ru_start.ru_utime.tv_sec));
             printf("Tempo de Sistema: %ld\n", (time_end.ru_stime.tv_sec-time_start.ru_stime.tv_sec));
