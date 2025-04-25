@@ -19,7 +19,8 @@ int main(){
         return 0;
     }
     int choose=0;
-
+    printf("Escolha 1 para algoritmo Euristico\nEscolha 2 para algoritmo ForçaBruta\n");
+    scanf("%d", &choose);
 
     while(1){
 
@@ -31,8 +32,6 @@ int main(){
         int matriz[NM[0]][NM[1]];
         copMat(NM[0],NM[1], t, matriz); // função feita para copiar a matriz e poder utiliza nos dois algoritmos
 
-        printf("Escolha 1 para algoritmo Euristico\nEscolha 2 para algoritmo ForçaBruta\n");
-        scanf("%d", &choose);
         switch (choose){
 
         case 1:
@@ -68,12 +67,12 @@ int main(){
             }
             long sec2=time_end2.tv_sec-time_start2.tv_sec;
             break;
+
         default:
             break;
         }
 
     }
-
     fclose(arq);
     return 0;
 }

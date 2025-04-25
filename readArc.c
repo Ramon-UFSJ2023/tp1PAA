@@ -11,7 +11,7 @@ int verify(int* vector){
     return 1;
 }
 
- int verifyDia(int linhas, int colunas, int matriz[linhas][colunas], int i, int j){
+int verifyDia(int linhas, int colunas, int matriz[linhas][colunas], int i, int j){
     
     const int diagonaisSimples[4][2] = {{+1,+1},{+1,-1},{-1,+1},{-1,-1}};
     int melhorCaminho=0;
